@@ -9,6 +9,8 @@ const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', async (request, response) => {
+  console.log(request.user);
+
   const appointmentsRepository= getCustomRepository(AppointmentsRepository);
   const appointments = await appointmentsRepository.find();
 
