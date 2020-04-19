@@ -4,6 +4,7 @@ import { compare } from "bcryptjs";
 import { sign } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
+import AppError from "../errors/AppError";
 
 interface RequestDTO {
   email: string;
@@ -24,13 +25,13 @@ class AuthenticateUserService {
     });
 
     if (!user) {
-      throw new Error('Invalid email or password');
+      throw new AppError('Invalid email or password', 401);
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error('Invalid email or password');
+      throw new AppError('Invalid email or password', 401);
     }
 
     const {secret, expiresIn} = authConfig.jwt;
