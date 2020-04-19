@@ -26,18 +26,13 @@ function ensureAuthenticated(
 
   const {secret, expiresIn} = authConfig.jwt;
 
-  try {
-    const decoded = verify(token, secret);
+  const decoded = verify(token, secret);
 
-    const { sub } = decoded as TokenPayload;
+  const { sub } = decoded as TokenPayload;
 
-    request.user = { id: sub };
+  request.user = { id: sub };
 
-    return next();
-  } catch {
-    throw new AppError('Invalid token', 403);
-  }
-
+  return next();
 }
 
 export default ensureAuthenticated;
