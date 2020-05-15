@@ -8,7 +8,7 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={logoImg} />
+        <img src={logoImg} alt="Go Barber" />
 
         <form>
           <h1>Faça seu logon</h1>
